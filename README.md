@@ -10,12 +10,16 @@ Persistence and Reliability: Uses Redis LPUSH and BRPOP operations to ensure tha
 
 Graceful Shutdown: Orchestrates system exits using sync.WaitGroup and os.Signal handling. The system ensures in-flight tasks are completed before workers exit to prevent data loss.
 
+Containerization: Fully dockerized environment using multi-stage builds and Docker Compose for one-click deployment and environment consistency.
+
 Real-time Observability: Features a custom metrics endpoint and a dashboard to monitor queue depth and system status in real-time.
 
 Technical Stack
 Language: Go 1.25 (Standard Library, Context, Sync)
 
 Broker: Redis (via go-redis/v9)
+
+Infrastructure: Docker, Docker Compose
 
 API: RESTful JSON API
 
@@ -34,32 +38,41 @@ graph LR
     W2 -->|Log| Console
     W3 -->|Log| Console
 
+    
 Getting Started
 Prerequisites
-Go 1.25 or higher
+Docker and Docker Compose
 
-Redis running on 127.0.0.1:6379
+Go 1.25 or higher (for local development)
 
-Installation and Execution
+Redis (for local development)
+
+Installation and Execution (Docker Compose)
 Clone the repository
 
 Bash
 
-git clone https://github.com/yourusername/go-distributed-task-queue.git
+git clone https://github.com/CorruptResonant/go-distributed-task-queue.git
 cd go-distributed-task-queue
-Start the backend
+Launch the system
 
 Bash
 
-go run main.go
+docker-compose up --build
 Open the dashboard Open the frontend/index.html file in a web browser.
 
+Testing
+Run the unit test suite to verify task serialization and model integrity:
+
+Bash
+
+go test ./internal/models/...
 System Demonstration
 1. Concurrency Test
-Use the Load Test button on the dashboard to inject 50 tasks. Observe the Go terminal to see Workers 1, 2, and 3 processing tasks in parallel. The dashboard queue depth will decrement as workers finish their processing blocks.
+Use the Load Test button on the dashboard to inject 50 tasks. Observe the logs to see Workers 1, 2, and 3 processing tasks in parallel. The dashboard queue depth will decrement as workers finish their processing blocks.
 
 2. Graceful Shutdown Test
-While tasks are being processed, trigger a Ctrl+C in the terminal. The API stops accepting new tasks immediately, but the workers finish their current processing block before logging a stopping message and exiting the process.
+While tasks are being processed, trigger a Ctrl+C in the terminal. The API stops accepting new tasks immediately, but the workers finish their current processing block before logging a stopping message and exiting the process. This demonstrates the use of Go Context and WaitGroups to maintain data integrity.
 
 Future Roadmap
 At-Least-Once Delivery: Implementation of the RPOPLPUSH pattern for task acknowledgment.
