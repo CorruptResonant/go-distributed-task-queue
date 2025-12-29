@@ -20,7 +20,12 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
-	redisBroker := broker.NewRedisBroker("127.0.0.1:6379")
+	redisAddr := os.Getenv("REDIS_ADDR")
+	if redisAddr == "" {
+		redisAddr = "127.0.0.1:6379" // Local fallback
+	}
+
+	redisBroker := broker.NewRedisBroker(redisAddr)
 
 	var wg sync.WaitGroup
 	numWorkers := 3

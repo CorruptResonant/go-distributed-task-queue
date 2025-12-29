@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"gdtq/internal/models"
-	"time" // Added time import
+	"time"
 
 	"github.com/redis/go-redis/v9"
 )
@@ -15,6 +15,11 @@ type RedisBroker struct {
 }
 
 func NewRedisBroker(addr string) *RedisBroker {
+	// If addr is empty, we provide a safe local default
+	if addr == "" {
+		addr = "127.0.0.1:6379"
+	}
+
 	return &RedisBroker{
 		client: redis.NewClient(&redis.Options{
 			Addr: addr,
@@ -22,6 +27,8 @@ func NewRedisBroker(addr string) *RedisBroker {
 		queue: "gdtq_tasks",
 	}
 }
+
+// ... rest of the file stays exactly the same ...
 
 func (r *RedisBroker) Push(ctx context.Context, task models.Task) error {
 	data, err := json.Marshal(task)
