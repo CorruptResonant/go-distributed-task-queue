@@ -1,4 +1,4 @@
-module gdtq
+module go-distributed-task-queue
 
 go 1.25.5
 

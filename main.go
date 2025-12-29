@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	"gdtq/internal/api"
-	"gdtq/internal/broker"
-	"gdtq/internal/worker"
+	"go-distributed-task-queue/internal/api"
+	"go-distributed-task-queue/internal/broker"
+	"go-distributed-task-queue/internal/worker"
 )
 
 func main() {

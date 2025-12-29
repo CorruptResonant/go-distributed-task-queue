@@ -3,7 +3,7 @@ package broker
 import (
 	"context"
 	"encoding/json"
-	"gdtq/internal/models"
+	"go-distributed-task-queue/internal/models"
 	"time"
 
 	"github.com/redis/go-redis/v9"

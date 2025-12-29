@@ -3,7 +3,7 @@ package worker
 import (
 	"context"
 	"fmt"
-	"gdtq/internal/broker"
+	"go-distributed-task-queue/internal/broker"
 	"sync"
 	"time"
 )

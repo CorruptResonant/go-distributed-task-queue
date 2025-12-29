@@ -2,8 +2,8 @@ package api
 
 import (
 	"encoding/json"
-	"gdtq/internal/broker"
-	"gdtq/internal/models"
+	"go-distributed-task-queue/internal/broker"
+	"go-distributed-task-queue/internal/models"
 	"net/http"
 )
 

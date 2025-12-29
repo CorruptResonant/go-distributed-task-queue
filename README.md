@@ -33,6 +33,7 @@ graph LR
     W1 -->|Log| Console
     W2 -->|Log| Console
     W3 -->|Log| Console
+
 Getting Started
 Prerequisites
 Go 1.25 or higher
