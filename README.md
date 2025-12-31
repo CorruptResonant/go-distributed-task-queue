@@ -70,7 +70,6 @@ go test ./internal/models/...
 System Demonstration
 1. Concurrency Test
 Use the Load Test button on the dashboard to inject 50 tasks. Observe the logs to see Workers 1, 2, and 3 processing tasks in parallel. The dashboard queue depth will decrement as workers finish their processing blocks.
-
 2. Graceful Shutdown Test
 While tasks are being processed, trigger a Ctrl+C in the terminal. The API stops accepting new tasks immediately, but the workers finish their current processing block before logging a stopping message and exiting the process. This demonstrates the use of Go Context and WaitGroups to maintain data integrity.
 
