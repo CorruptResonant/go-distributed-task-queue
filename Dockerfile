@@ -15,6 +15,8 @@ WORKDIR /root/
 
 COPY --from=builder /app/gdtq .
 
+COPY --from=builder /app/frontend ./frontend
+
 EXPOSE 8080
 
 CMD ["./gdtq"]

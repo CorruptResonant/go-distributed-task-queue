@@ -38,6 +38,9 @@ func main() {
 	mux.Handle("/enqueue", &api.TaskHandler{Broker: redisBroker})
 	mux.HandleFunc("/stats", api.StatsHandler(redisBroker))
 
+	fs := http.FileServer(http.Dir("./frontend"))
+	mux.Handle("/", fs)
+
 	server := &http.Server{
 		Addr:    ":8080",
 		Handler: mux,
